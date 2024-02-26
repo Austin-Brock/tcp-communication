@@ -1,29 +1,31 @@
-import socket
+from socket import *
 
 # Client setup
-server_host = 'localhost'
-server_port = 12345
-client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client_socket.connect((server_host, server_port))
+server_name, server_port = 'localhost', 12000
+client_socket = socket(AF_INET, SOCK_STREAM)
+client_socket.connect((server_name, server_port))
+print('Connected to Remote Server')
 
-# Accept an integer input from the user
+# Input handling
+client_name = "Client of Bob Smith"
 while True:
     user_input = input("Enter an integer between 1 and 100: ")
-    if user_input.isdigit():
+    try:
         num = int(user_input)
         if 1 <= num <= 100:
             break
-    print("Invalid input. Please try again.")
+        else:
+            print("Number must be between 1 and 100.")
+    except ValueError:
+        print("Please enter a valid integer.")
 
-# Send a message to the server
-client_name = "Client of Bob Smith"
-message = f"{client_name},{num}"
+# Sending data
+message = f"{client_name}, {num}"
 client_socket.send(message.encode())
+print('Data sent... waiting for the response.')
 
-# Wait for the server's reply and print it
+# Receiving and displaying response
 response = client_socket.recv(1024).decode()
-server_name, server_number, sum_numbers = response.split(',')
-print(f"{server_name} chose {server_number}, and the sum is {sum_numbers}")
-
-# Close the socket
+print('From Server:', response)
 client_socket.close()
+
