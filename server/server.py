@@ -6,7 +6,7 @@ server_port = 12000
 server_socket = socket(AF_INET, SOCK_STREAM)
 server_socket.bind(('localhost', server_port))
 server_socket.listen(1)
-server_name = "Server of Bob Smith"
+server_name = "Server of Austin Brock"
 print(server_name + " is now ONLINE")
 
 while True:

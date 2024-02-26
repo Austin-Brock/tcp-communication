@@ -7,7 +7,7 @@ client_socket.connect((server_name, server_port))
 print('Connected to Remote Server')
 
 # Input handling
-client_name = "Client of Bob Smith"
+client_name = "Client of Austin Brock"
 while True:
     user_input = input("Enter an integer between 1 and 100: ")
     try:
